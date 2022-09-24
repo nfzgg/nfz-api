@@ -1,0 +1,22 @@
+{
+  "name": "nfz-api",
+  "version": "1.0.0",
+  "description": "APIs for NFZ.gg",
+  "homepage": "https://github.com/nfzgg/nfz-api#readme",
+  "bugs": {
+    "url": "https://github.com/nfzgg/nfz-api/issues"
+  },
+  "license": "MIT",
+  "author": "src@nfz.gg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nfzgg/nfz-api.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
