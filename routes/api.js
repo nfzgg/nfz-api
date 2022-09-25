@@ -44,6 +44,22 @@ async function getCollectionMetadata(addr) {
   }
 }
 
+router.get('/collection/:addr/balance/:owner', function(req, res, next) {
+  getBalanceOf(req.params.addr, req.params.owner).then((balance => {res.send(balance)}));
+})
+
+async function getBalanceOf(addr, owner) {
+  var result = {};
+  try {
+    const ERC721 = new web3.eth.Contract(abiERC721, addr);
+    result.balance = await ERC721.methods.balanceOf(owner).call();
+  } catch (e) {
+    result.err = e.message;
+  } finally {
+    return result;
+  }
+}
+
 router.get('/nfz/:addr', function(req, res, next) {
   getNFZMetadata(req.params.addr).then((metadata => {res.send(metadata)}));
 })
