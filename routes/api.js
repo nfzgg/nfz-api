@@ -17,7 +17,7 @@ const abiNFZUpgradeable = JSON.parse(jsonNFZUpgradeable);
 
 // Contract addresses on Goerli
 const addrNFZFactory = '0x4c4af5e192db9d02c65a1486f6f34c30eafc55b0';
-// NFT collection '0xB706416c431f6d5B878aF563A1D822d39118612b';
+// NFT collection 0xB706416c431f6d5B878aF563A1D822d39118612b;
 // NFZ instance 0x46D286f71A9e0DA3f97BDA5c475C79Ea680Dbd16
 
 
@@ -59,6 +59,22 @@ async function getNFZMetadata(addr) {
     metadata.err = e.message;
   } finally {
     return metadata;
+  }
+}
+
+router.get('/nfz/:addr/balance/:owner', function(req, res, next) {
+  getBalanceOf(req.params.addr, req.params.owner).then((balance => {res.send(balance)}));
+})
+
+async function getBalanceOf(addr, owner) {
+  var result = {};
+  try {
+    const NFZ = new web3.eth.Contract(abiNFZUpgradeable, addr);
+    result.balance = await NFZ.methods.balanceOf(owner).call();
+  } catch (e) {
+    result.err = e.message;
+  } finally {
+    return result;
   }
 }
 
