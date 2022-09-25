@@ -4,22 +4,23 @@ const express = require('express');
 const router = express.Router();
 const Web3 = require("web3");
 
-const web3 = new Web3('https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161');
+const infuraKey = process.env.INFURA_KEY || '9aa3d95b3bc440fa88ea12eaa4456161';
+const web3 = new Web3('https://goerli.infura.io/v3/' + infuraKey);
 
 const jsonERC721 = fs.readFileSync('./abis/ERC721.json');
 const jsonNFZUpgradeable = fs.readFileSync('./abis/NFZUpgradeable.json');
 const jsonNFZFactory = fs.readFileSync('./abis/NFZFactory.json');
 
+const abiNFZFactory = JSON.parse(jsonNFZFactory);
 const abiERC721 = JSON.parse(jsonERC721);
 const abiNFZUpgradeable = JSON.parse(jsonNFZUpgradeable);
-const abiNFZFactory = JSON.parse(jsonNFZFactory);
 
 // Contract addresses on Goerli
-const addrERC721 = '0xd236d7a671ff0b62e92d7be3f722994c4349c14c';
-const addrNFZUpgradeable = '0xa7e5a8bda8f76dc15545b8c34c637a5fcfcb5655';
-const addrNFZFactory = '0xba13fe3f1906c312c6b073de0dfbe3f10431de91';
+const addrNFZFactory = '0x4c4af5e192db9d02c65a1486f6f34c30eafc55b0';
+// NFT collection '0xB706416c431f6d5B878aF563A1D822d39118612b';
+// NFZ instance 0x46D286f71A9e0DA3f97BDA5c475C79Ea680Dbd16
 
-const NFZUpgradeable = new web3.eth.Contract(abiNFZUpgradeable, addrNFZUpgradeable);
+
 const NFZFactory = new web3.eth.Contract(abiNFZFactory, addrNFZFactory);
 
 router.get('/', function(res, res, next) {
@@ -31,12 +32,34 @@ router.get('/collection/:addr', function(req, res, next) {
 })
 
 async function getCollectionMetadata(addr) {
-  const ERC721 = new web3.eth.Contract(abiERC721, addr);
-  var metadata = {}
-  metadata.name = await ERC721.methods.name().call();
-  metadata.symbol = await ERC721.methods.symbol().call();
-  console.log(metadata);
-  return metadata;
+  var metadata = {};
+  try {
+    const ERC721 = new web3.eth.Contract(abiERC721, addr);
+    metadata.name = await ERC721.methods.name().call();
+    metadata.symbol = await ERC721.methods.symbol().call();
+  } catch (e) {
+    metadata.err = e.message;
+  } finally {
+    return metadata;
+  }
+}
+
+router.get('/nfz/:addr', function(req, res, next) {
+  getNFZMetadata(req.params.addr).then((metadata => {res.send(metadata)}));
+})
+
+async function getNFZMetadata(addr) {
+  var metadata = {};
+  try {
+    const NFZ = new web3.eth.Contract(abiNFZUpgradeable, addr);
+    metadata.name = await NFZ.methods.name().call();
+    metadata.symbol = await NFZ.methods.symbol().call();
+    metadata.infusedCollection = await NFZ.methods.infusedCollection().call();
+  } catch (e) {
+    metadata.err = e.message;
+  } finally {
+    return metadata;
+  }
 }
 
 module.exports = router;
