@@ -37,11 +37,14 @@ block content
   form(action='#', method='POST')
     p
       | From: 
-      input#NFTCollection(type='text', name='From')
+      input#transferFrom(type='text', name='From')
     p
       | To: 
-      input#NFZName(type='text')
-    input#transferNFZButton(type='button', value='Transfer')
+      input#transferTo(type='text')
+    p
+      | Token Id: 
+      input#tokenId(type='text')
+    input#transferNFZButton(type='button', value='Transfer NFZ')
   br
   br
   br

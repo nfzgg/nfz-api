@@ -13,6 +13,7 @@ var accounts;
 var ethereumButton;
 var showAccount;
 var infuseButton;
+var transferNFZButton;
 
 var aline;
 var anca;
@@ -26,12 +27,14 @@ const addrMike = '0x1a0E80fbdb3B3f2Fc82F848c660Fb5555f703Ab0';
 
 const addrNFZFactory = '0x4c4af5e192db9d02c65a1486f6f34c30eafc55b0';
 var addrNFZ = '0x46D286f71A9e0DA3f97BDA5c475C79Ea680Dbd16';
+var addrNFT = '0xB706416c431f6d5B878aF563A1D822d39118612b';
 
 async function addListeners() {
     ethereumButton = document.getElementById('enableEthereumButton');
     showAccount = document.getElementById('showAccount');
     infuseButton = document.getElementById('infuseButton');
 	updateBalancesButton = document.getElementById('updateBalancesButton');
+	transferNFZButton = document.getElementById('transferNFZButton');
 
 	aline = document.getElementById('aline');
 	anca = document.getElementById('anca');
@@ -49,6 +52,10 @@ async function addListeners() {
 	updateBalancesButton.addEventListener('click', () => {
 		updateBalances();
 	});
+
+	transferNFZButton.addEventListener('click', () => {
+		transferNFZ();
+	})
 }
 
 async function getAccount() {
@@ -59,8 +66,8 @@ async function getAccount() {
 }
 
 async function infuseCollection() {
-    NFTCollection = document.getElementById('NFTCollection').value;
-    NFZName = document.getElementById('NFZName').value;
+    const NFTCollection = document.getElementById('NFTCollection').value;
+    const NFZName = document.getElementById('NFZName').value;
 
     const NFZFactory = await new window.web3.eth.Contract(abiNFZFactory, addrNFZFactory);
     const account = await getAccount();
@@ -69,6 +76,18 @@ async function infuseCollection() {
 	console.log('NFZ deployed\n' + JSON.stringify(deployed));
     alert('NFZ deployed at ' + deployed.events[0].address);
 	addrNFZ = deployed.events[0].address;
+}
+
+async function transferNFZ() {
+	const transferFrom = document.getElementById('transferFrom').value;
+	const transferTo = document.getElementById('transferTo').value;
+	const tokenId = document.getElementById('tokenId').value;
+
+	const NFZClone = await new window.web3.eth.Contract(abiNFZ, addrNFZ);
+	const account = await getAccount();
+
+	const deployed = await NFZClone.methods.safeTransferFrom(transferFrom, transferTo, tokenId).send({from: account});
+	alert('NFT token ' + tokenId + ' transferred from ' + transferFrom + ' to ' + transferTo);
 }
 
 function updateBalances() {
