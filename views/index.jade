@@ -1,5 +1,21 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  img.image(src='/images/logo.png' alt='NFZ.gg logo' width='200')
+  br
+  br
+  br
+
+  <button id="enableEthereumButton">Enable Ethereum</button>
+  p
+    | Metamask Account: <span id="showAccount"></span></h2>
+  br
+  br
+  br
+  
+  h1 Infuse NFT collections with transferrable utilities!
+  form(action='#', method='POST')
+    p
+      | NFT Collection: 
+      input(type='text', name='NFTCollection', value='0xB706416c431f6d5B878aF563A1D822d39118612b')          
+    input#infuseButton(type='button', value='INFUSE')
