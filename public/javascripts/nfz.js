@@ -71,12 +71,41 @@ async function infuseCollection() {
 	addrNFZ = deployed.events[0].address;
 }
 
-async function updateBalances() {
-	aline.firstChild.innerHTML = 'NFZ Balance ' + balanceNFZ(addrAline);
-	console.log('balances');
+function updateBalances() {
+	balanceNFT(addrAline).then(balance => {
+		aline.firstChild.innerHTML = 'NFT Balance: ' + balance;
+	})
+	balanceNFZ(addrAline).then(balance => {
+		aline.lastChild.innerHTML = 'NFZ Balance: ' + balance;
+	})
+	balanceNFT(addrAnca).then(balance => {
+		anca.firstChild.innerHTML = 'NFT Balance: ' + balance;
+	})
+	balanceNFZ(addrAnca).then(balance => {
+		anca.lastChild.innerHTML = 'NFZ Balance: ' + balance;
+	})
+	balanceNFT(addrMarios).then(balance => {
+		marios.firstChild.innerHTML = 'NFT Balance: ' + balance;
+	})
+	balanceNFZ(addrMarios).then(balance => {
+		marios.lastChild.innerHTML = 'NFZ Balance: ' + balance;
+	})
+	balanceNFT(addrMike).then(balance => {
+		mike.firstChild.innerHTML = 'NFT Balance: ' + balance;
+	})
+	balanceNFZ(addrMike).then(balance => {
+		mike.lastChild.innerHTML = 'NFZ Balance: ' + balance;
+	})
 }
 
 async function balanceNFZ(owner) {
-	const balance = await fetch('/nfz/' + addrNFZ + '/balance/' + owner);
-	return balance;
+	const request = await fetch('/api/nfz/' + addrNFZ + '/balance/' + owner);
+	const response = await request.json();
+	return response.balance;
+}
+
+async function balanceNFT(owner) {
+	const request = await fetch('/api/collection/' + addrNFZ + '/balance/' + owner);
+	const response = await request.json();
+	return response.balance;
 }
