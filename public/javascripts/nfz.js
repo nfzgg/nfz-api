@@ -9,25 +9,46 @@ if (typeof window.ethereum !== 'undefined') {
     window.web3 = new Web3(window.ethereum);
 }
 
-const addrNFZFactory = '0x4c4af5e192db9d02c65a1486f6f34c30eafc55b0';
-
 var accounts;
 var ethereumButton;
 var showAccount;
 var infuseButton;
 
+var aline;
+var anca;
+var marios;
+var mike;
+
+const addrAline = '0x3BB3D8e0748603C040c88357e053B73f106aAEA3';
+const addrAnca = '0xbDe66C7b596fAf0d4f9501EEfc3f1348312A2995';
+const addrMarios = '0x48093A68Acfc7627f369048EF58eb23209C792E4';
+const addrMike = '0x1a0E80fbdb3B3f2Fc82F848c660Fb5555f703Ab0';
+
+const addrNFZFactory = '0x4c4af5e192db9d02c65a1486f6f34c30eafc55b0';
+var addrNFZ = '0x46D286f71A9e0DA3f97BDA5c475C79Ea680Dbd16';
+
 async function addListeners() {
     ethereumButton = document.getElementById('enableEthereumButton');
     showAccount = document.getElementById('showAccount');
     infuseButton = document.getElementById('infuseButton');
+	updateBalancesButton = document.getElementById('updateBalancesButton');
+
+	aline = document.getElementById('aline');
+	anca = document.getElementById('anca');
+	marios = document.getElementById('marios');
+	mike = document.getElementById('mike');
 
     ethereumButton.addEventListener('click', () => {
         getAccount();
-      });
+	});
 
     infuseButton.addEventListener('click', () => {
         infuseCollection();
-    })
+    });
+
+	updateBalancesButton.addEventListener('click', () => {
+		updateBalances();
+	});
 }
 
 async function getAccount() {
@@ -47,6 +68,15 @@ async function infuseCollection() {
     const deployed = await NFZFactory.methods.infuse(NFZName, 'NFZ', NFTCollection).send({from: account});
 	console.log('NFZ deployed\n' + JSON.stringify(deployed));
     alert('NFZ deployed at ' + deployed.events[0].address);
+	addrNFZ = deployed.events[0].address;
 }
 
+async function updateBalances() {
+	aline.firstChild.innerHTML = 'NFZ Balance ' + balanceNFZ(addrAline);
+	console.log('balances');
+}
 
+async function balanceNFZ(owner) {
+	const balance = await fetch('/nfz/' + addrNFZ + '/balance/' + owner);
+	return balance;
+}
