@@ -124,7 +124,7 @@ async function balanceNFZ(owner) {
 }
 
 async function balanceNFT(owner) {
-	const request = await fetch('/api/collection/' + addrNFZ + '/balance/' + owner);
+	const request = await fetch('/api/collection/' + addrNFT + '/balance/' + owner);
 	const response = await request.json();
 	return response.balance;
 }
