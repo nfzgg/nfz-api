@@ -87,7 +87,7 @@ async function transferNFZ() {
 	const account = await getAccount();
 
 	const deployed = await NFZClone.methods.safeTransferFrom(transferFrom, transferTo, tokenId).send({from: account});
-	alert('NFT token ' + tokenId + ' transferred from ' + transferFrom + ' to ' + transferTo);
+	alert('NFZ token ' + tokenId + ' transferred from ' + transferFrom + ' to ' + transferTo);
 }
 
 function updateBalances() {
