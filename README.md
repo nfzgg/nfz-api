@@ -1,2 +1,2 @@
-# nfz-api
-APIs for NFZ.gg
+# nfz-web
+Webserver and APIs for NFZ.gg

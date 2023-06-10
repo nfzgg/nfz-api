@@ -1,16 +1,16 @@
 {
-  "name": "nfz-api",
-  "version": "1.0.0",
-  "description": "APIs for NFZ.gg",
-  "homepage": "https://github.com/nfzgg/nfz-api#readme",
+  "name": "nfz-web",
+  "version": "0.0.1",
+  "description": "Webserver and APIs for NFZ.gg",
+  "homepage": "https://github.com/nfzgg/nfz-web#readme",
   "bugs": {
-    "url": "https://github.com/nfzgg/nfz-api/issues"
+    "url": "https://github.com/nfzgg/nfz-web/issues"
   },
   "license": "MIT",
   "author": "src@nfz.gg",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nfzgg/nfz-api.git"
+    "url": "git+https://github.com/nfzgg/nfz-web.git"
   },
   "main": "index.js",
   "scripts": {
