@@ -32,3 +32,14 @@
     transition: transform 300ms ease;
   }
 }
+
+@media (min-width: 768px) {
+  header {
+    font-size: 1.25rem;
+  }
+
+  #menu {
+    display: flex;
+    align-items: center;
+  }
+}
