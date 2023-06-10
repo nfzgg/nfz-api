@@ -94,4 +94,20 @@ async function getBalanceOf(addr, owner) {
   }
 }
 
+router.get('/nfz/:addr/isconsumed/:tokenid', function(req, res, next) {
+  getIsConsumed(req.params.addr, req.params.tokenid).then((isConsumed => {res.send(isConsumed)}));
+})
+
+async function getIsConsumed(addr, tokenId) {
+  var result = {};
+  try {
+    const NFZ = new web3.eth.Contract(abiNFZUpgradeable, addr);
+    result.isConsumed = await NFZ.methods.isConsumed(tokenId).call();
+  } catch (e) {
+    result.err = e.message;
+  } finally {
+    return result;
+  }
+}
+
 module.exports = router;
