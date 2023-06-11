@@ -5,15 +5,14 @@ block content
     div(class="container mx-auto px-4 lg:max-w-4xl")
       form(class="text-white rounded-lg px-10 py-8")
       label(for="network", class="block mb-4")
-        span(class="text-2xl font-bold") Select Network:
+        span(class="text-2xl font-bold") Select Testnet:
       select(id="network", class="block w-full p-4 border border-blue-200 rounded appearance-none focus:outline-none focus:border-yellow-200 bg-transparent hover:bg-yellow-200 text-white hover:text-blue-500 text-lg font-semibold") 
-        option(value="ethereum-goerli" selected) Ethereum Goerli
-        option(value="optimism-goerli" disabled) Optimism Goerli
-        option(value="gnosis-testnet") Gnosis Testnet
-        option(value="taiko" disabled) Taiko
+        option(value="ethereum") Ethereum
+        option(value="base") Base
+        option(value="gnosis" disabled) Gnosis Chiado
         option(value="mantle" disabled) Mantle
-        option(value="base" disabled) Base
         option(value="scroll" disabled) Scroll
+        option(value="optimism" disabled) Optimism
       button(id="selectNetworkButton" class="bg-white hover:bg-yellow-200 text-blue-500 font-bold py-4 px-10 rounded-full mt-6") Connect Wallet
 
       div(id="infuse-form", class="hidden")
