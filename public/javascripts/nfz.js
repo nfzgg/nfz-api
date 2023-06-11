@@ -147,3 +147,9 @@ async function balanceNFT(owner) {
 	const response = await request.json();
 	return response.balance;
 }
+
+async function isConsumed(tokenId) {
+	const request = await fetch('/api/nfz/' + addrNFZ + '/isconsumed/' + tokenId);
+	const response = await request.json();
+	return response.isConsumed;
+}
