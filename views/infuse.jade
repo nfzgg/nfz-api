@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  div(class="bg-blue-500 py-8 text-white")
+    div(class="container mx-auto px-4 lg:max-w-4xl")
+      form(class="text-white rounded-lg px-10 py-8")
+      label(for="network", class="block mb-4")
+        span(class="text-2xl font-bold") Select Network:
+      select(id="network", class="block w-full p-4 border border-blue-200 rounded appearance-none focus:outline-none focus:border-yellow-200 bg-transparent hover:bg-yellow-200 text-white hover:text-blue-300 text-lg font-semibold") 
+        option(value="ethereum-goerli" selected) Ethereum Goerli
+        option(value="optimism-goerli" disabled) Optimism Goerli
+        option(value="gnosis-testnet") Gnosis Testnet
+        option(value="taika" disabled) Taika
+        option(value="mantle" disabled) Mantle
+        option(value="base" disabled) Base
+        option(value="scroll" disabled) Scroll
+      button(id="selectNetworkButton" class="bg-white hover:bg-yellow-200 text-blue-500 font-bold py-4 px-10 rounded-full mt-6") Connect Wallet
+
+      div(id="infuse-form", class="hidden")
+        label(for="nft-address", class="block mt-8 mb-4")
+          span(class="text-2xl font-bold") NFT Collection Address:
+        input(id="nft-address", type="text", class="block w-full p-4 border border-blue-200 rounded appearance-none focus:outline-none focus:border-blue-300 bg-transparent")
+
+        label(for="description", class="block mt-8 mb-4")
+          span(class="text-2xl font-bold") Utility Description:
+        textarea(id="description", class="block w-full p-4 border border-blue-200 rounded appearance-none focus:outline-none focus:border-blue-300 bg-transparent", rows="1")
+
+        button(class="bg-white hover:bg-yellow-200 text-blue-500 font-bold py-4 px-10 rounded-full mt-8 text-lg") INFUSE

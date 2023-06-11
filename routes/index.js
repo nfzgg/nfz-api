@@ -6,7 +6,13 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'NFZ Transferable Utilities' });
 });
 
-/* GET home page. */
+/* GET infuse page. */
+router.get('/infuse', function(req, res, next) {
+  res.render('infuse', { title: 'Infuse Utility' });
+});
+
+
+/* GET demo page. */
 router.get('/demo', function(req, res, next) {
   res.render('demo', { title: 'NFZ Demo' });
 });

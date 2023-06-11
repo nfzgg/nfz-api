@@ -41,21 +41,40 @@ async function addListeners() {
 	marios = document.getElementById('marios');
 	mike = document.getElementById('mike');
 
-    ethereumButton.addEventListener('click', () => {
-        getAccount();
-	});
+	selectNetwokButton = document.getElementById("selectNetworkButton");
 
-    infuseButton.addEventListener('click', () => {
-        infuseCollection();
-    });
+	if (ethereumButton) {
+    	ethereumButton.addEventListener('click', () => {
+        	getAccount();
+		});
+	}
 
-	updateBalancesButton.addEventListener('click', () => {
-		updateBalances();
-	});
+	if (infuseButton) {
+		infuseButton.addEventListener('click', () => {
+			infuseCollection();
+		});
+	}
 
-	transferNFZButton.addEventListener('click', () => {
-		transferNFZ();
-	})
+
+	if (updateBalancesButton) {
+		updateBalancesButton.addEventListener('click', () => {
+			updateBalances();
+		});
+	}
+
+	if (transferNFZButton) {
+		transferNFZButton.addEventListener('click', () => {
+			transferNFZ();
+		});
+	}
+
+
+	if (selectNetwokButton) {
+		selectNetwokButton.addEventListener('click', () => {
+			document.getElementById("infuse-form").classList.remove("hidden");
+		});
+	}
+
 }
 
 async function getAccount() {
