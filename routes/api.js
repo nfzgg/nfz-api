@@ -4,8 +4,7 @@ const express = require('express');
 const router = express.Router();
 const Web3 = require("web3");
 
-const infuraKey = process.env.INFURA_KEY || '9aa3d95b3bc440fa88ea12eaa4456161';
-const web3 = new Web3('https://goerli.infura.io/v3/' + infuraKey);
+const web3 = new Web3('https://rpc.eu-north-1.gateway.fm/v4/ethereum/non-archival/goerli?apiKey=' + process.env.GATEWAYFM);
 
 const jsonERC721 = fs.readFileSync('./abis/ERC721.json');
 const jsonNFZUpgradeable = fs.readFileSync('./abis/NFZUpgradeable.json');
