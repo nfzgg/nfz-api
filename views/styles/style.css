@@ -42,3 +42,21 @@
     align-items: center;
   }
 }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  flex: 1;
+}
+
+footer {
+  flex-shrink: 0;
+}
